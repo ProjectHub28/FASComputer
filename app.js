@@ -5,23 +5,23 @@
 
 const ACADEMIC_DATA = {
   1: {
-    className: "Class 1",
+    className: "ALL 1-8",
     description: "Foundational computer skills, parts of a computer, and drawing basics.",
     iconColor: "var(--color-accent)",
     chapters: [
       {
         num: 1,
-        title: "Computer - My Smart Friend",
+        title: "9-10",
         desc: "Identifying computers in daily life and understanding what machines do.",
-        answerKeyUrl: "#", // TODO: Add Class 1 Chapter 1 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 1 Chapter 1 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/drive/folders/1c_ZJYZLUFLUNRtpPog9AIX5ADlQGiXve?usp=drive_link", // TODO: Add Class 1 Chapter 1 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/drive/folders/1c_ZJYZLUFLUNRtpPog9AIX5ADlQGiXve?usp=drive_link"      // TODO: Add Class 1 Chapter 1 Video Tutorial Drive Link
       },
       {
         num: 2,
-        title: "Main Parts of a Computer",
+        title: "1-8",
         desc: "Introduction to Monitor, Keyboard, Mouse, CPU, and Printer.",
-        answerKeyUrl: "#", // TODO: Add Class 1 Chapter 2 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 1 Chapter 2 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/drive/folders/1YCxSTcHr6w5vHrxpP9esDDiDL58EWyey?usp=drive_link", // TODO: Add Class 1 Chapter 2 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/drive/folders/1YCxSTcHr6w5vHrxpP9esDDiDL58EWyey?usp=drive_link"      // TODO: Add Class 1 Chapter 2 Video Tutorial Drive Link
       },
       {
         num: 3,
@@ -228,31 +228,31 @@ const ACADEMIC_DATA = {
     chapters: [
       {
         num: 1,
-        title: "Computer Number Systems",
+        title: "Browsing Safely",
         desc: "Decimal, Binary, Octal, and Hexadecimal numbers and their conversions.",
-        answerKeyUrl: "#", // TODO: Add Class 7 Chapter 1 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 7 Chapter 1 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1YxK3ecQrR0v7VdHvd56qs2m9AwdzAksv/view?usp=drive_link", // TODO: Add Class 7 Chapter 1 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1JbUz0emN-0wE4XoMyQMR94LHV_VrRc76/view?usp=drive_link"      // TODO: Add Class 7 Chapter 1 Video Tutorial Drive Link
       },
       {
         num: 2,
-        title: "Excel Formulas and Chart Analysis",
+        title: "Cloud Computing",
         desc: "Using formulas (SUM, AVERAGE, count) and rendering column, bar, and pie charts.",
-        answerKeyUrl: "#", // TODO: Add Class 7 Chapter 2 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 7 Chapter 2 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1YxK3ecQrR0v7VdHvd56qs2m9AwdzAksv/view?usp=drive_link", // TODO: Add Class 7 Chapter 2 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1hMVm9wxvSY2fGtwZKvmTg-BFfOfzu22H/view?usp=drive_link"      // TODO: Add Class 7 Chapter 2 Video Tutorial Drive Link
       },
       {
         num: 3,
-        title: "Advanced HTML5: Lists & Links",
+        title: "Formulas and Functions in Excel",
         desc: "Creating ordered lists, unordered lists, description lists, and hyperlink anchors.",
-        answerKeyUrl: "#", // TODO: Add Class 7 Chapter 3 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 7 Chapter 3 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1YxK3ecQrR0v7VdHvd56qs2m9AwdzAksv/view?usp=drive_link", // TODO: Add Class 7 Chapter 3 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1WvLp2eB-8jaslLJVrJJPjIGiUyrwoYy5/view?usp=drive_link"      // TODO: Add Class 7 Chapter 3 Video Tutorial Drive Link
       },
       {
         num: 4,
-        title: "Getting Started with Python",
+        title: "Advanced Features of Excel",
         desc: "Interactive mode, script mode, variables, strings, and simple inputs.",
-        answerKeyUrl: "#", // TODO: Add Class 7 Chapter 4 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 7 Chapter 4 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1YxK3ecQrR0v7VdHvd56qs2m9AwdzAksv/view?usp=drive_link", // TODO: Add Class 7 Chapter 4 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1i_5IAMcsRWuEOsQLKjzWk-ryXWP1qTgr/view?usp=drive_link"      // TODO: Add Class 7 Chapter 4 Video Tutorial Drive Link
       }
     ]
   },
