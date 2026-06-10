@@ -151,38 +151,38 @@ const ACADEMIC_DATA = {
     chapters: [
       {
         num: 1,
-        title: "Evolution & History of Computers",
+        title: "More on Windows",
         desc: "Early counting devices (Abacus) and the five generations of computers.",
-        answerKeyUrl: "#", // TODO: Add Class 5 Chapter 1 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 5 Chapter 1 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1lMws7mH2l26vCFdNq-xcgH5t9R9PajyR/view?usp=drive_link", // TODO: Add Class 5 Chapter 1 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1VFQjEYayEhmp3hEj3U-o3MzAxbmLy3gi/view?usp=drive_link"      // TODO: Add Class 5 Chapter 1 Video Tutorial Drive Link
       },
       {
         num: 2,
-        title: "Managing Files and Folders",
+        title: "Internet and Email",
         desc: "Using File Explorer to create, rename, copy, paste, and delete directories.",
-        answerKeyUrl: "#", // TODO: Add Class 5 Chapter 2 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 5 Chapter 2 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1lMws7mH2l26vCFdNq-xcgH5t9R9PajyR/view?usp=drive_link", // TODO: Add Class 5 Chapter 2 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1A7VqBEH6iqUsAXdXrw-irETNFY4JKkPn/view?usp=drive_link"      // TODO: Add Class 5 Chapter 2 Video Tutorial Drive Link
       },
       {
         num: 3,
-        title: "Working with Tables in MS Word",
+        title: "More on Microsoft Word",
         desc: "Inserting tables, formatting borders, merging cells, and entering tabular data.",
-        answerKeyUrl: "#", // TODO: Add Class 5 Chapter 3 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 5 Chapter 3 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1lMws7mH2l26vCFdNq-xcgH5t9R9PajyR/view?usp=drive_link", // TODO: Add Class 5 Chapter 3 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1Kp8sTO69hoD-fLspOVzc3fzjpHPWW9Ic/view?usp=drive_link"      // TODO: Add Class 5 Chapter 3 Video Tutorial Drive Link
       },
       {
         num: 4,
-        title: "Applying Transitions and Animations",
+        title: "Working with Slides",
         desc: "Animating texts and images in slides and setting transition duration.",
-        answerKeyUrl: "#", // TODO: Add Class 5 Chapter 4 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 5 Chapter 4 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1lMws7mH2l26vCFdNq-xcgH5t9R9PajyR/view?usp=drive_link", // TODO: Add Class 5 Chapter 4 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1nW1xylMh7xFYqISzhT9RR-Ospm6IWZLO/view?usp=drive_link"      // TODO: Add Class 5 Chapter 4 Video Tutorial Drive Link
       },
       {
         num: 5,
-        title: "Scratch loops & conditional scripts",
+        title: "Enhancing a Presentation",
         desc: "Using Control blocks (repeat, forever) and sensing blocks to make games.",
-        answerKeyUrl: "#", // TODO: Add Class 5 Chapter 5 Answer Key Drive Link
-        videoUrl: "#"      // TODO: Add Class 5 Chapter 5 Video Tutorial Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1lMws7mH2l26vCFdNq-xcgH5t9R9PajyR/view?usp=drive_link", // TODO: Add Class 5 Chapter 5 Answer Key Drive Link
+        videoUrl: "https://drive.google.com/file/d/1SNQzGPgZf8UW8hGP4dtBTSdvvxWd9YO5/view?usp=drive_link"      // TODO: Add Class 5 Chapter 5 Video Tutorial Drive Link
       }
     ]
   },
