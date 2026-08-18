@@ -4,24 +4,46 @@
 // Example: answerKeyUrl: "https://drive.google.com/open?id=your-file-id"
 
 const ACADEMIC_DATA = {
-  1: {
+  0: {
     className: "ALL 1-8",
-    description: "Foundational computer skills, parts of a computer, and drawing basics.",
+    description: "Access shared coursework materials and portal directories (Protected).",
     iconColor: "var(--color-accent)",
+    isLocked: true,
     chapters: [
       {
         num: 1,
-        title: "9-10",
-        desc: "Identifying computers in daily life and understanding what machines do.",
-        answerKeyUrl: "https://drive.google.com/drive/folders/1c_ZJYZLUFLUNRtpPog9AIX5ADlQGiXve?usp=drive_link", // TODO: Add Class 1 Chapter 1 Answer Key Drive Link
-        videoUrl: "https://drive.google.com/drive/folders/1c_ZJYZLUFLUNRtpPog9AIX5ADlQGiXve?usp=drive_link"      // TODO: Add Class 1 Chapter 1 Video Tutorial Drive Link
+        title: "Overview 9-10",
+        desc: "General folders and guidelines for Class 9 and 10.",
+        answerKeyUrl: "https://drive.google.com/drive/folders/1c_ZJYZLUFLUNRtpPog9AIX5ADlQGiXve?usp=drive_link",
+        videoUrl: "https://drive.google.com/drive/folders/1c_ZJYZLUFLUNRtpPog9AIX5ADlQGiXve?usp=drive_link"
       },
       {
         num: 2,
-        title: "1-8",
+        title: "Overview 1-8",
+        desc: "General folders and guidelines for Class 1 to 8.",
+        answerKeyUrl: "https://drive.google.com/drive/folders/1YCxSTcHr6w5vHrxpP9esDDiDL58EWyey?usp=drive_link",
+        videoUrl: "https://drive.google.com/drive/folders/1YCxSTcHr6w5vHrxpP9esDDiDL58EWyey?usp=drive_link"
+      }
+    ]
+  },
+  1: {
+    className: "Class 1",
+    description: "Foundational computer skills, parts of a computer, and drawing basics.",
+    iconColor: "var(--color-primary)",
+    chapters: [
+      {
+        num: 1,
+        title: "Introduction to Computers",
+        desc: "Identifying computers in daily life and understanding what machines do.",
+        answerKeyUrl: "#", // TODO: Add Class 1 Chapter 1 Answer Key Drive Link
+        videoUrl: "#"      // TODO: Add Class 1 Chapter 1 Video Tutorial Drive Link
+      },
+      {
+        num: 2,
+        title: "Parts of a Computer",
         desc: "Introduction to Monitor, Keyboard, Mouse, CPU, and Printer.",
-        answerKeyUrl: "https://drive.google.com/drive/folders/1YCxSTcHr6w5vHrxpP9esDDiDL58EWyey?usp=drive_link", // TODO: Add Class 1 Chapter 2 Answer Key Drive Link
-        videoUrl: "https://drive.google.com/drive/folders/1YCxSTcHr6w5vHrxpP9esDDiDL58EWyey?usp=drive_link"      // TODO: Add Class 1 Chapter 2 Video Tutorial Drive Link
+        answerKeyUrl: "#", // TODO: Add Class 1 Chapter 2 Answer Key Drive Link
+        videoUrl: "#"      // TODO: Add Class 1 Chapter 2 Video Tutorial Drive Link
       },
       {
         num: 3,
@@ -372,6 +394,9 @@ const ICONS = {
   empty: `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`
 };
 
+// --- CONFIGURATION ---
+const CLASS_LOCK_PASSCODE = "fas1234"; // Default passcode for locked blocks
+
 // --- DOM ELEMENTS REFERENCE ---
 let activeClassId = null;
 let currentSearchQuery = "";
@@ -393,6 +418,12 @@ function initClassCards() {
     const data = ACADEMIC_DATA[classId];
     const card = document.createElement("div");
     card.classList.add("class-card");
+
+    // Check if block is locked and not unlocked in current session
+    if (data.isLocked && !isClassUnlocked(classId)) {
+      card.classList.add("locked");
+    }
+
     card.setAttribute("data-class-id", classId);
     card.setAttribute("id", `class-btn-${classId}`);
 
@@ -422,6 +453,14 @@ function setupEventListeners() {
 
 // Selection handler for classes
 function selectClass(classId) {
+  const data = ACADEMIC_DATA[classId];
+
+  // If block is locked, prompt for passcode first
+  if (data && data.isLocked && !isClassUnlocked(classId)) {
+    promptClassUnlock(classId);
+    return;
+  }
+
   // Update selection states on cards
   document.querySelectorAll(".class-card").forEach((card) => {
     card.classList.remove("active");
@@ -434,7 +473,7 @@ function selectClass(classId) {
 
   activeClassId = classId;
   currentSearchQuery = ""; // Reset search for the new class
-  
+
   const searchInput = document.getElementById("chapter-search");
   if (searchInput) searchInput.value = "";
 
@@ -445,7 +484,7 @@ function selectClass(classId) {
   // Scroll smoothly to materials workspace area
   const workspace = document.getElementById("materials-workspace");
   workspace.classList.add("visible");
-  
+
   setTimeout(() => {
     workspace.scrollIntoView({ behavior: "smooth", block: "start" });
   }, 100);
@@ -455,7 +494,7 @@ function selectClass(classId) {
 function renderWorkspaceHeader() {
   const badge = document.getElementById("workspace-badge");
   const title = document.getElementById("workspace-title");
-  
+
   if (!activeClassId) return;
 
   const data = ACADEMIC_DATA[activeClassId];
@@ -472,7 +511,7 @@ function renderChapters() {
   const filteredChapters = classData.chapters.filter((chapter) => {
     return (
       chapter.title.toLowerCase().includes(currentSearchQuery) ||
-      chapter.desc.toLowerCase().includes(currentSearchQuery) ||
+      (chapter.desc && chapter.desc.toLowerCase().includes(currentSearchQuery)) ||
       `chapter ${chapter.num}`.includes(currentSearchQuery)
     );
   });
@@ -498,9 +537,13 @@ function renderChapters() {
     // Handle check if links exist or are placeholders to display appropriate warning or action
     const keyBtnClass = chapter.answerKeyUrl === "#" ? "btn-secondary" : "btn-primary";
     const keyToolTip = chapter.answerKeyUrl === "#" ? "Placeholder link (needs update in app.js)" : "Download Answer Key";
-    
+
     const videoBtnClass = chapter.videoUrl === "#" ? "btn-secondary" : "btn-primary";
     const videoToolTip = chapter.videoUrl === "#" ? "Placeholder link (needs update in app.js)" : "Watch Video Tutorial";
+
+    // Determine if the URL is playable directly on site
+    const isFolder = chapter.videoUrl && (chapter.videoUrl.includes("/drive/folders/") || chapter.videoUrl.includes("/drive/u/"));
+    const isPlayable = chapter.videoUrl !== "#" && !isFolder && getEmbedUrl(chapter.videoUrl) !== null;
 
     item.innerHTML = `
       <div class="chapter-info">
@@ -522,7 +565,7 @@ function renderChapters() {
           <span>Answer Key</span>
         </a>
         <a href="${chapter.videoUrl}" 
-           target="_blank" 
+           ${isPlayable ? `onclick="playVideoInline(event, '${chapter.videoUrl}', '${chapter.title.replace(/'/g, "\\'")}')"` : 'target="_blank"'}
            class="btn ${videoBtnClass}" 
            title="${videoToolTip}"
            id="chapter-${chapter.num}-video-btn">
@@ -534,4 +577,188 @@ function renderChapters() {
 
     chaptersContainer.appendChild(item);
   });
+}
+
+// --- CORE UTILITY HELPERS ---
+
+// Check if class has been unlocked in the current session
+function isClassUnlocked(classId) {
+  try {
+    const unlocked = JSON.parse(sessionStorage.getItem("unlocked_classes") || "[]");
+    return unlocked.includes(Number(classId)) || unlocked.includes(String(classId));
+  } catch (e) {
+    return false;
+  }
+}
+
+// Display passcode verification modal dialog
+function promptClassUnlock(classId) {
+  const modal = document.getElementById("lock-modal");
+  const input = document.getElementById("lock-passcode-input");
+  const submitBtn = document.getElementById("lock-submit-btn");
+  const errorMsg = document.getElementById("lock-error-msg");
+  const closeBtn = document.getElementById("lock-modal-close");
+  const card = modal ? modal.querySelector(".modal-card") : null;
+
+  if (!modal || !input || !submitBtn || !errorMsg || !closeBtn || !card) return;
+
+  // Clear previous states
+  input.value = "";
+  errorMsg.innerText = "";
+  errorMsg.classList.remove("visible");
+  card.classList.remove("shake");
+
+  // Show modal
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  input.focus();
+
+  // Re-bind click event by replacing buttons to clean old listeners
+  const newSubmitBtn = submitBtn.cloneNode(true);
+  submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+
+  const newCloseBtn = closeBtn.cloneNode(true);
+  closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+
+  // Keyboard close listener
+  const handleKeydown = (e) => {
+    if (e.key === "Escape") closeLockModal();
+  };
+  window.addEventListener("keydown", handleKeydown);
+
+  // Background click close listener
+  const handleBgClick = (e) => {
+    if (e.target === modal) closeLockModal();
+  };
+  modal.addEventListener("click", handleBgClick);
+
+  newCloseBtn.addEventListener("click", () => {
+    closeLockModal();
+  });
+
+  function closeLockModal() {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    window.removeEventListener("keydown", handleKeydown);
+    modal.removeEventListener("click", handleBgClick);
+  }
+
+  // Verification process
+  const verifyPasscode = () => {
+    const entered = input.value.trim();
+    if (entered === CLASS_LOCK_PASSCODE) {
+      try {
+        const unlocked = JSON.parse(sessionStorage.getItem("unlocked_classes") || "[]");
+        if (!unlocked.includes(classId)) {
+          unlocked.push(classId);
+          sessionStorage.setItem("unlocked_classes", JSON.stringify(unlocked));
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      const cardEl = document.getElementById(`class-btn-${classId}`);
+      if (cardEl) {
+        cardEl.classList.remove("locked");
+      }
+      closeLockModal();
+      selectClass(classId);
+    } else {
+      // Shake animation and display error message
+      card.classList.remove("shake");
+      void card.offsetWidth; // Trigger layout reflow to restart CSS animation
+      card.classList.add("shake");
+
+      errorMsg.innerText = "Incorrect passcode. Please try again.";
+      errorMsg.classList.add("visible");
+
+      input.value = "";
+      input.focus();
+    }
+  };
+
+  newSubmitBtn.addEventListener("click", verifyPasscode);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      verifyPasscode();
+    }
+  });
+}
+
+// Convert Drive and YouTube URLs to embed URL schemes
+function getEmbedUrl(url) {
+  if (!url || url === "#") return null;
+
+  // Google Drive Link matching (file view link or open id parameter)
+  const driveMatch = url.match(/(?:drive\.google\.com\/file\/d\/|open\?id=)([^/\?]+)/);
+  if (driveMatch && driveMatch[1]) {
+    return `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
+  }
+
+  // YouTube Link matching
+  const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\?]+)/);
+  if (ytMatch && ytMatch[1]) {
+    return `https://www.youtube.com/embed/${ytMatch[1]}`;
+  }
+
+  if (url.includes("youtube.com/embed/")) {
+    return url;
+  }
+
+  // Direct playable video extensions (e.g. mp4)
+  if (url.endsWith(".mp4") || url.endsWith(".webm") || url.endsWith(".ogg")) {
+    return url;
+  }
+
+  return null;
+}
+
+// Inline video player overlay presentation handler
+function playVideoInline(event, url, title) {
+  if (event) event.preventDefault();
+
+  const embedUrl = getEmbedUrl(url);
+  if (!embedUrl) {
+    window.open(url, "_blank");
+    return;
+  }
+
+  const modal = document.getElementById("video-modal");
+  const iframe = document.getElementById("video-iframe");
+  const modalTitle = document.getElementById("video-modal-title");
+
+  if (!modal || !iframe || !modalTitle) return;
+
+  modalTitle.innerText = title;
+  iframe.src = embedUrl;
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+
+  const handleKeydown = (e) => {
+    if (e.key === "Escape") closeVideoModal();
+  };
+  window.addEventListener("keydown", handleKeydown);
+
+  const handleBgClick = (e) => {
+    if (e.target === modal) closeVideoModal();
+  };
+  modal.addEventListener("click", handleBgClick);
+
+  const closeBtn = document.getElementById("video-modal-close");
+  const handleCloseClick = () => {
+    closeVideoModal();
+  };
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", handleCloseClick);
+  }
+
+  function closeVideoModal() {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    iframe.src = ""; // Clear iframe source to immediately stop playing video
+    window.removeEventListener("keydown", handleKeydown);
+    modal.removeEventListener("click", handleBgClick);
+    if (closeBtn) closeBtn.removeEventListener("click", handleCloseClick);
+  }
 }
