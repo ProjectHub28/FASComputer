@@ -886,3 +886,163 @@ footer a:hover {
   opacity: 1;
 }
 
+/* --- Maths Gallery & Cards --- */
+.maths-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.maths-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.maths-card:hover {
+  transform: translateY(-8px);
+  background: var(--bg-glass-hover);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.3);
+}
+
+.maths-card-preview {
+  position: relative;
+  width: 100%;
+  padding-top: 60%; /* 5:3 Aspect Ratio */
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+}
+
+.maths-card-preview img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.maths-card:hover .maths-card-preview img {
+  transform: scale(1.08);
+}
+
+.maths-card-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 12, 20, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity var(--transition-normal);
+  z-index: 2;
+}
+
+.maths-card-preview:hover .maths-card-hover-overlay {
+  opacity: 1;
+}
+
+.maths-card-hover-overlay svg {
+  stroke: var(--color-accent);
+  transition: transform var(--transition-normal);
+}
+
+.maths-card-preview:hover .maths-card-hover-overlay svg {
+  transform: scale(1.1);
+}
+
+.maths-card-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.maths-card-info h4 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.maths-card-info p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.maths-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.maths-card-actions .btn {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  gap: 6px;
+}
+
+.maths-card-actions .btn svg {
+  flex-shrink: 0;
+}
+
+/* --- Image Modal Styles --- */
+.image-modal-card {
+  max-width: 900px;
+  padding: 24px;
+}
+
+.image-modal-container {
+  position: relative;
+  width: 100%;
+  max-height: 70vh;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #04060a;
+  border: 1px solid var(--border-glass);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-modal-container img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+/* Responsive adjustment for image cards */
+@media (max-width: 768px) {
+  .maths-card-actions {
+    flex-direction: column;
+  }
+}
+
+
