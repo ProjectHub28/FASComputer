@@ -355,16 +355,16 @@ const ACADEMIC_DATA = {
     chapters: [
       {
         num: 1,
-        title: "Methods of Communication",
+        title: "Methods of Communication with Part A All answer",
         desc: "Methods of Communication",
         answerKeyUrl: "https://drive.google.com/file/d/163bl0Unhw5N1l_l5SA5leb_ne9_DGlII/view?usp=drive_link", // TODO: Add Class 10 Chapter 1 Answer Key Drive Link
         videoUrl: "https://drive.google.com/file/d/102_YCTpZhQs1TVL4Rq5oKh-VBKMb2Jar/view?usp=drive_link"      // TODO: Add Class 10 Chapter 1 Video Tutorial Drive Link
       },
       {
         num: 2,
-        title: "Communication Cycle",
+        title: "Communication Cycle with Part B All answer",
         desc: "Communication Cycle",
-        answerKeyUrl: "https://drive.google.com/file/d/163bl0Unhw5N1l_l5SA5leb_ne9_DGlII/view?usp=drive_link", // TODO: Add Class 10 Chapter 2 Answer Key Drive Link
+        answerKeyUrl: "https://drive.google.com/file/d/1P24Pt1ipBJF8xcNe7S7vNoI5EVHb6Yfe/view?usp=drive_link", // TODO: Add Class 10 Chapter 2 Answer Key Drive Link
         videoUrl: "https://drive.google.com/file/d/1aLf3OlE5frz7rmEf_2yuq7L-OdQRlWJb/view?usp=drive_link"      // TODO: Add Class 10 Chapter 2 Video Tutorial Drive Link
       },
       {
